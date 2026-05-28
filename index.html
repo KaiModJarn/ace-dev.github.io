@@ -3,118 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hover Car Showcase</title>
+    <title>My Awesome Portfolio with Swiper.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Noto+Sans+Thai:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: #0b0f19;
-            font-family: sans-serif;
-            overflow-x: hidden;
+            font-family: 'Noto Sans Thai', sans-serif;
         }
-
-        /* กำหนดพื้นที่สำหรับสร้างระยะในการ Scroll (ยิ่งสูง ยิ่งต้องเลื่อนเมาส์เยอะกว่าจะเปลี่ยนรูป) */
-        .scroll-container {
-            height: 400vh; /* 400% ของความสูงหน้าจอ สำหรับ 4 รูป */
-            position: relative;
+        .code-font {
+            font-family: 'Fira Code', monospace;
         }
-
-        /* ตรึงส่วนแสดงผลให้อยู่กับที่กลางหน้าจอ */
-        .viewer-sticky {
-            position: sticky;
-            top: 0;
+        /* กำหนดขนาดสไลด์ */
+        .swiper {
             width: 100%;
-            height: 100vh;
+            height: 300px; /* ปรับความสูงสไลด์ตามต้องการ */
+            border-radius: 0.75rem; /* rounded-xl */
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.2); /* slate-800/20 */
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        /* จัดการตำแหน่งของรูปภาพให้อยู่ทับกันพอดี */
-        .image-wrapper {
-            position: relative;
-            width: 80vw;
-            max-width: 1000px;
-            aspect-ratio: 16/9;
-        }
-
-        .car-image {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .swiper-slide img {
+            display: block;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            opacity: 0; /* ซ่อนรูปภาพไว้ก่อน */
-            transition: opacity 0.4s ease-in-out; /* เพิ่มความนุ่มนวลตอนเปลี่ยนรูป */
+            object-fit: cover; /* จัดการรูปภาพให้เต็มพอดี */
         }
-
-        /* คลาสที่จะถูกเปิดใช้งานด้วย JavaScript เมื่อถึงระยะ Scroll */
-        .car-image.active {
-            opacity: 1;
+        /* ปรับสีปุ่มสไลด์ */
+        .swiper-button-next, .swiper-button-prev {
+            color: #06b6d4; /* cyan-500 */
         }
-
-        /* ส่วนหัวข้อบอกใบ้ด้านบน */
-        .instruction {
-            position: absolute;
-            top: 40px;
-            color: #ffffff;
-            font-size: 1.2rem;
-            text-align: center;
-            width: 100%;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            text-transform: uppercase;
+        .swiper-pagination-bullet-active {
+            background: #06b6d4; /* cyan-500 */
         }
     </style>
 </head>
-<body>
+<body class="bg-[#0b0f19] text-slate-200 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900">
 
-    <div class="scroll-container">
-        <div class="viewer-sticky">
-            <div class="instruction">Scroll Down to Rotate the Car</div>
-            
-            <div class="image-wrapper">
-                <!-- ใส่พาธรูปภาพทั้ง 4 รูปของคุณที่นี่ -->
-                <img src="images/project1-slide1.png" alt="Front" class="car-image active">
-                <img src="images/project1-slide2.png" alt="Side" class="car-image">
-                <img src="images/project1-slide3.png" alt="Rear" class="car-image">
-                <img src="images/watermarked_img_5712597349868697082.png" alt="Top" class="car-image">
+    <nav class="border-b border-slate-800/80 backdrop-blur-md bg-[#0b0f19]/70 sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="code-font text-cyan-400 font-bold text-xl tracking-wider">&lt;ACE.DEV /&gt;</div>
+            <div class="flex gap-6 text-sm text-slate-400">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
             </div>
         </div>
-    </div>
+    </nav>
 
+    <header id="about" class="max-w-5xl mx-auto px-6 py-20 md:py-32 w-full flex flex-col justify-center">
+        <div class="code-font text-cyan-400 text-sm mb-3 tracking-widest uppercase">// Hello World, I am</div>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-4">
+            Full-Stack Developer <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">& Automation Enthusiast</span>
+        </h1>
+        <p class="text-slate-400 max-w-2xl text-base md:text-lg leading-relaxed mb-8">
+            มุ่งเน้นการสร้างสรรค์เว็บแอปพลิเคชันที่รวดเร็ว ปลอดภัย และตอบโจทย์การใช้งานจริง 
+            พร้อมทั้งหลงใหลในการเชื่อมต่อโลกซอฟต์แวร์เข้ากับระบบ Hardware Automation เพื่อรีดประสิทธิภาพการทำงานให้ถึงขีดสุด
+        </p>
+        <div class="flex gap-4">
+            <a href="#projects" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition-all shadow-lg shadow-cyan-500/20 text-sm">
+                ดูผลงานของฉัน
+            </a>
+            <a href="https://github.com" target="_blank" class="border border-slate-700 hover:border-cyan-400/50 hover:bg-slate-900/50 text-slate-300 px-6 py-3 rounded-lg transition-all text-sm code-font">
+                view_github()
+            </a>
+        </div>
+    </header>
+
+    <section id="projects" class="max-w-5xl mx-auto px-6 py-16 w-full border-t border-slate-900">
+        <div class="flex items-center gap-4 mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-white">โปรเจกต์ที่โดดเด่น</h2>
+            <div class="h-[1px] bg-slate-800 flex-grow"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-[#131a2c] border border-slate-800/60 rounded-xl hover:border-cyan-500/40 transition-all group overflow-hidden">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="images/project1-slide1.png" alt="Slide 1"></div>
+                        <div class="swiper-slide"><img src="images/project1-slide2.png" alt="Slide 2"></div>
+                        <div class="swiper-slide"><img src="images/project1-slide3.png" alt="Slide 3"></div>
+                        <div class="swiper-slide"><img src="images/project1-slide4.png" alt="Slide 4"></div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs code-font text-cyan-400 bg-cyan-950/50 border border-cyan-800/40 px-2 py-1 rounded">Web App with Slider</span>
+                            <span class="text-slate-500 text-xs code-font">2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">Smart Inventory System with Slides</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            ระบบจัดการคลังสินค้าและยืม-คืนอุปกรณ์แบบเรียลไทม์ ตอนนี้คุณสามารถดูภาพการใช้งานจริงผ่านสไลด์หมุนได้นี้เพื่อความเข้าใจที่ดียิ่งขึ้น!
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs code-font text-slate-400">
+                        <span>#NextJS</span> <span>#Supabase</span> <span>#TailwindCSS</span> <span>#SwiperJS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#131a2c] border border-slate-800/60 rounded-xl p-6 hover:border-emerald-500/40 transition-all group flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs code-font text-emerald-400 bg-emerald-950/50 border border-emerald-800/40 px-2 py-1 rounded">IoT & Automation</span>
+                        <span class="text-slate-500 text-xs code-font">2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Hardware Monitor Link</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        ระบบควบคุมและดึงข้อมูลจากไมโครคอนโทรลเลอร์ผ่านเว็บอินเตอร์เฟส รองรับโปรโตคอลการสื่อสารในงานอุตสาหกรรมเพื่อการตรวจวัดที่แม่นยำ
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs code-font text-slate-400">
+                    <span>#Python</span> <span>#ESP8266</span> <span>#Modbus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="max-w-5xl mx-auto px-6 py-16 w-full border-t border-slate-900 mb-20">
+        <div class="flex items-center gap-4 mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-white">ความเชี่ยวชาญ</h2>
+            <div class="h-[1px] bg-slate-800 flex-grow"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            <div class="bg-[#131a2c]/40 border border-slate-800/40 p-4 rounded-lg">
+                <div class="text-white font-semibold mb-1">Frontend</div>
+                <div class="text-xs code-font text-slate-500">Next.js / Tailwind</div>
+            </div>
+            <div class="bg-[#131a2c]/40 border border-slate-800/40 p-4 rounded-lg">
+                <div class="text-white font-semibold mb-1">Backend</div>
+                <div class="text-xs code-font text-slate-500">Node.js / Supabase</div>
+            </div>
+            <div class="bg-[#131a2c]/40 border border-slate-800/40 p-4 rounded-lg">
+                <div class="text-white font-semibold mb-1">Automation</div>
+                <div class="text-xs code-font text-slate-500">PLC / Modbus / IoT</div>
+            </div>
+            <div class="bg-[#131a2c]/40 border border-slate-800/40 p-4 rounded-lg">
+                <div class="text-white font-semibold mb-1">Scripting</div>
+                <div class="text-xs code-font text-slate-500">Python / Excel / PDF</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-900 bg-[#080b12] py-8 px-6 text-center text-xs code-font text-slate-600">
+        <div class="max-w-5xl mx-auto">
+            © 2026 ACE.DEV. Built with passion and clean code.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const images = document.querySelectorAll('.car-image');
-        const container = document.querySelector('.scroll-container');
-
-        window.addEventListener('scroll', () => {
-            // คำนวณหาเปอร์เซ็นต์การ Scroll ปัจจุบัน (0 ถึง 1)
-            const scrollTop = window.scrollY;
-            const maxScroll = container.scrollHeight - window.innerHeight;
-            const scrollFraction = scrollTop / maxScroll;
-
-            // นำเปอร์เซ็นต์มาแบ่งสัดส่วนตามจำนวนรูปภาพที่มี
-            const totalImages = images.length;
-            let imageIndex = Math.floor(scrollFraction * totalImages);
-
-            // ป้องกันไม่ให้ Index เกินจำนวนรูปภาพ
-            if (imageIndex >= totalImages) imageIndex = totalImages - 1;
-            if (imageIndex < 0) imageIndex = 0;
-
-            // วนลูปเพื่อเปิด/ปิด คลาส active ในการแสดงรูปภาพ
-            images.forEach((img, index) => {
-                if (index === imageIndex) {
-                    img.classList.add('active');
-                } else {
-                    img.classList.remove('active');
-                }
-            });
+        var swiper = new Swiper(".mySwiper", {
+            loop: true, // วนลูปสไลด์
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true, // คลิกที่จุดเพื่อไปสไลด์นั้นได้
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            autoplay: {
+                delay: 3000, // สไลด์เปลี่ยนอัตโนมัติทุก 3 วินาที
+                disableOnInteraction: false, // ไม่หยุดสไลด์อัตโนมัติเมื่อมีการโต้ตอบ
+            },
         });
     </script>
+
 </body>
 </html>
